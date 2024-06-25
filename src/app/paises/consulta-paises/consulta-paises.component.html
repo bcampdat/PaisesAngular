@@ -34,21 +34,24 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="primera col-md-3">
+        <div class="primera col-md-4">
             <form #formulario="ngForm" (submit)="getMoneda()">
                 <div class="form-group">
                     <label class="form-label" for="moneda">Moneda</label>
                     <select class="form-control" id="moneda" name="moneda" [(ngModel)]="monedaSeleccionada" required #moneda="ngModel">
-                        <option *ngFor="let moneda of monedas" [value]="moneda">{{ moneda }}</option>
+                        <option *ngFor="let moneda of monedas" [value]="moneda.code">{{ moneda.code }}</option>
                     </select>
                     <div *ngIf="moneda.invalid && moneda.touched" class="text-danger">
                         La moneda es obligatoria
                     </div>
                 </div>
                 <button type="submit" class="btn btn-dark" [disabled]="formulario.invalid">Aceptar</button>
+                <div *ngIf="simboloMonedaSeleccionada" class=" mt-2">
+                    <strong>Símbolo:</strong><span class="simbolo">{{ simboloMonedaSeleccionada }}</span>
+                </div>
             </form>
         </div>
-        <div class="segunda col-md-9">
+        <div class="segunda col-md-8">
             <!-- Table for displaying search results -->
             <table class="table">
                 <thead>

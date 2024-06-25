@@ -9,7 +9,7 @@ import { ICountries } from './consulta-paises/countries.interface';
 export class CountriesService {
 
   constructor(private http: HttpClient) {}
-  //         ambito alias :dependencia
+
   getCountries(continente: string): Observable<ICountries[]> {
     return this.http.get<ICountries[]>(`https://restcountries.com/v3.1/region/${continente}`);
   }

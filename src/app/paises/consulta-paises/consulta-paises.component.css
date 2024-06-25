@@ -66,3 +66,10 @@ table a {
 .form-label {
     display: none;
 }
+
+.simbolo {
+    color: #207b88;
+    font-size: 50px;
+    margin-left: 15px;
+}
+

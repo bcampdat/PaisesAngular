@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Currencies, ICountries } from './countries.interface';
+import { ICountries } from './countries.interface';
 import { CountriesService } from '../countries.service';
 
 @Component({
@@ -12,61 +12,70 @@ export class ConsultaPaisesComponent implements OnInit {
 
   monedaSeleccionada: string = '';
 
+  simboloMonedaSeleccionada: string = '';
+
   countries: ICountries[] = [];
 
-  monedas: string[] = [];
-
+  monedas: { code: string, symbol: string }[] = [];
+  
   mostrarError = false;
 
-  constructor(private CountriesService: CountriesService) {}
+  constructor(private countriesService: CountriesService) {}
 
   ngOnInit() {
     this.getAllCurrencies();
   }
 
   getAllCurrencies() {
-    this.CountriesService.getAllCurrencies().subscribe({
+    this.countriesService.getAllCurrencies().subscribe({
       next: (data: ICountries[]) => {
-        const uniqueCurrencies = new Set<string>();
+        const uniqueCurrencies = new Map<string, string>();
         data.forEach(country => {
           if (country.currencies) {
-            Object.keys(country.currencies).forEach(currency => uniqueCurrencies.add(currency));
+            Object.entries(country.currencies).forEach(([code, currency]) => {
+              uniqueCurrencies.set(code, (currency as any).symbol);
+            });
           }
         });
-        this.monedas = Array.from(uniqueCurrencies).sort();
+        this.monedas = Array.from(uniqueCurrencies.entries()).map(([code, symbol]) => ({ code, symbol }));
       },
       error: (err) => {
         console.log('no se ha podido obtener los datos', err);
       },
     });
   }
+
   getCountries() {
-    this.CountriesService.getCountries(this.continenteSeleccionado).subscribe({
-      // next =then
+    this.countriesService.getCountries(this.continenteSeleccionado).subscribe({
       next: (data: ICountries[]) => {
         console.log(data);
         this.countries = data;
         this.mostrarError = false;
       },
       error: (err) => {
-        (this.mostrarError = true),
-          console.log('no se ha podido obtener los datos', err);
-      },
-    });
-  }
-  getMoneda() {
-    this.CountriesService.getMoneda(this.monedaSeleccionada).subscribe({
-      // next =then
-      next: (data: ICountries[]) => {
-        console.log(data);
-        this.countries = data;
-        this.mostrarError = false;
-      },
-      error: (err) => {
-        (this.mostrarError = true),
-          console.log('no se ha podido obtener los datos', err);
+        this.mostrarError = true;
+        console.log('no se ha podido obtener los datos', err);
       },
     });
   }
 
+  getMoneda() {
+    this.countriesService.getMoneda(this.monedaSeleccionada).subscribe({
+      next: (data: ICountries[]) => {
+        console.log(data);
+        this.countries = data;
+        this.mostrarError = false;
+        this.actualizarSimboloMoneda();
+      },
+      error: (err) => {
+        this.mostrarError = true;
+        console.log('no se ha podido obtener los datos', err);
+      },
+    });
+  }
+
+  actualizarSimboloMoneda() {
+    const moneda = this.monedas.find(m => m.code === this.monedaSeleccionada);
+    this.simboloMonedaSeleccionada = moneda ? moneda.symbol : '';
+  }
 }

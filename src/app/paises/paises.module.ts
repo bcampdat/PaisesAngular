@@ -6,7 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { DataViewModule } from 'primeng/dataview';
 import { InputTextModule } from 'primeng/inputtext';
-
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { InputTextModule } from 'primeng/inputtext';
     ButtonModule,
     TagModule,
     DataViewModule,
-    InputTextModule
+    InputTextModule,
+    TableModule
   ]
 })
 export class PaisesModule { }
