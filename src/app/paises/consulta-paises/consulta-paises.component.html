@@ -1,0 +1,73 @@
+<!-- <p>countries pimering works!</p>
+<div class="card">
+    <p-dataView #dv [value]="countries">     
+        <ng-template pTemplate="list" let-countries>
+            <div class="grid grid-nogutter">
+                <div class="col-12" *ngFor="let country of countries; let first = first" class="col-12">
+                    <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3"
+                        [ngClass]="{ 'border-top-1 surface-border': !first }">
+                        <div class="md:w-10rem relative">
+                            <img class="block xl:block mx-auto border-round w-full" [src]="country.flags.png"
+                                [alt]="country.name.official" />
+                        </div>
+                        <div
+                            class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
+                            <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
+                                <div>
+                                    <span class="font-medium text-secondary text-sm">{{ country.name.official }}</span>
+                                    <div class="text-lg font-medium text-900 mt-2">{{ country.capital }}</div>
+                                </div>
+                            </div>
+                            <div class="card flex justify-content-center">
+                                <input pInputText pKeyFilter="all" placeholder="noneda" [(ngModel)]="monedaSeleccionada" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div> -->
+
+
+<!-- paises.component.html -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="primera col-md-3">
+            <form #formulario="ngForm" (submit)="getMoneda()">
+                <div class="form-group">
+                    <label class="form-label" for="moneda">Moneda</label>
+                    <select class="form-control" id="moneda" name="moneda" [(ngModel)]="monedaSeleccionada" required #moneda="ngModel">
+                        <option *ngFor="let moneda of monedas" [value]="moneda">{{ moneda }}</option>
+                    </select>
+                    <div *ngIf="moneda.invalid && moneda.touched" class="text-danger">
+                        La moneda es obligatoria
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark" [disabled]="formulario.invalid">Aceptar</button>
+            </form>
+        </div>
+        <div class="segunda col-md-9">
+            <!-- Table for displaying search results -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Capital</th>
+                        <th>Bandera</th>
+                        <th>Maps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let country of countries">
+                        <td>{{ country.name.official }}</td>
+                        <td>{{ country.capital }}</td>
+                        <td><img class="flag img-fluid" [src]="country.flags.png" alt="{{ country.name.official }}'s flag"></td>
+                        <td><a class="link" href="https://www.google.com/maps/search/?api=1&query={{ country.capital }}" target="_blank">Ver en Google Maps</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

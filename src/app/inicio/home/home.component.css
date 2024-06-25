@@ -1,0 +1,11 @@
+.row  {
+
+    font-family: "Titillium Web", sans-serif;
+    background-color: whitesmoke;
+    color: #42454a;
+
+    & p {
+        color: #207b88;
+    }
+}
+
