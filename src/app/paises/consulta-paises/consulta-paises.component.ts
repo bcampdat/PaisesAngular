@@ -7,6 +7,8 @@ import { CountriesService } from '../countries.service';
   templateUrl: './consulta-paises.component.html',
   styleUrls: ['./consulta-paises.component.css'],
 })
+
+
 export class ConsultaPaisesComponent implements OnInit {
   continenteSeleccionado: string = '';
 
@@ -17,8 +19,10 @@ export class ConsultaPaisesComponent implements OnInit {
   countries: ICountries[] = [];
 
   monedas: { code: string, symbol: string }[] = [];
-  
+
   mostrarError = false;
+
+  
 
   constructor(private countriesService: CountriesService) {}
 

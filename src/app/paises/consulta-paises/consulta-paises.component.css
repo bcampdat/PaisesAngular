@@ -1,3 +1,7 @@
+.row {
+    height: 80vh;
+}
+
 .form-control {
     font-family: "Titillium Web", sans-serif;
     color: #42454a;

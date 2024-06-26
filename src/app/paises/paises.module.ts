@@ -8,6 +8,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 
+
 @NgModule({
   declarations: [
     ConsultaPaisesComponent
@@ -19,7 +20,7 @@ import { TableModule } from 'primeng/table';
     TagModule,
     DataViewModule,
     InputTextModule,
-    TableModule
+    TableModule,
   ]
 })
 export class PaisesModule { }
