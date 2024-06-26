@@ -5,7 +5,7 @@ import { CountriesService } from '../countries.service';
 @Component({
   selector: 'app-consulta-paises',
   templateUrl: './consulta-paises.component.html',
-  styleUrls: ['./consulta-paises.component.css'],
+  styleUrls: ['./consulta-paises.component.css'],  
 })
 
 

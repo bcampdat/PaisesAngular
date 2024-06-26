@@ -28,11 +28,61 @@
         </ng-template>
     </p-dataView>
 </div> -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="primera mt-3 col-md-4">
+            <form #formulario="ngForm" (submit)="getMoneda()">
+                <div class="form-group">
+                    <label class="form-label" for="moneda">Moneda</label>
+                    <select class="form-control" id="moneda" name="moneda" [(ngModel)]="monedaSeleccionada" required
+                        #moneda="ngModel">
+                        <option *ngFor="let moneda of monedas" [value]="moneda.code">{{ moneda.code }}</option>
+                    </select>
+                    <div *ngIf="moneda.invalid && moneda.touched" class="text-danger">
+                        La moneda es obligatoria
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark" [disabled]="formulario.invalid">Aceptar</button>
+                <div *ngIf="simboloMonedaSeleccionada" class=" mt-2">
+                    <strong>Símbolo:</strong><span class="simbolo">{{ simboloMonedaSeleccionada }}</span>
+                </div>
+            </form>
+        </div>
+        <div class="segunda col-md-8">
+            <p-table [value]="countries" [paginator]="true" [rows]="3" [globalFilterFields]="['name.official']"
+                [tableStyle]="{'min-width': '40rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Capital</th>
+                        <th>Bandera</th>
+                        <th>Maps</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-countries>
+                    <tr>
+                        <td>{{ countries.name.official }}</td>
+                        <td><img class="flag img-fluid" [src]="countries.flags.png"
+                                alt="{{ countries.name.official }}'s flag" width="100" class="shadow-4"></td>
+                        <td>{{ countries.capital }}</td>
+                        <td><a class="link" href="https://www.google.com/maps/search/?api=1&query={{ countries.capital }}"
+                                target="_blank">Ver en Google Maps</a></td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="flex align-items-center justify-content-between">
+                        In total there are {{countries ? countries.length : 0 }} countries.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
 
 
 <!-- paises.component.html -->
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
         <div class="primera col-md-4">
             <form #formulario="ngForm" (submit)="getMoneda()">
@@ -74,4 +124,4 @@
             </table>
         </div>
     </div>
-</div>
+</div> -->
