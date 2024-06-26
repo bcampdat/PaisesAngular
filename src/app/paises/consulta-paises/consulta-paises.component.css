@@ -1,5 +1,5 @@
 .row {
-    height: 80vh;
+    height: 70vh;
 }
 
 .form-control {
@@ -26,7 +26,7 @@
 
 .link {
     font-family: "Titillium Web", sans-serif;
-    color: black;
+    color: #88898a;
     height: 22px;
     border-bottom: 1px solid transparent;
     transition: 0.5s ease-in-out;
